@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.http import HttpResponse
+from django.template.loader import get_template
+# 模版
+from django.shortcuts import render
+def index(request):
+    print(request)
+    print(type(request))
+    return render(request,'index.html',{'user':'hello world'})
+    #return HttpResponse('hello world')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^index$', index),
 ]
