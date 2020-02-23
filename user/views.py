@@ -2,7 +2,6 @@ from django.http import JsonResponse, HttpResponse, HttpRequest, HttpResponseBad
 import logging
 import simplejson
 from .models import User
-from django.db.models.query import QuerySet
 
 
 # Create your views here.
@@ -14,13 +13,13 @@ def reg(request: HttpRequest):
         email = payload['email']
         # 数据库中查看Email有没有
         qs = User.objects.filter(email=email)
-        print(qs.query,'---------------')
+        print(qs.query, '---------------')
         if qs:  # email已经存在了
             return HttpResponseBadRequest()
         name = payload['name']
         password = payload['password']
         print(email, name, password)
-
+        logging.info(email)
         user = User()
         user.email = email
         user.password = password
@@ -28,7 +27,7 @@ def reg(request: HttpRequest):
 
         try:
             user.save()
-            return JsonResponse({'user_id':user.id})
+            return JsonResponse({'user_id': user.id})
         except Exception as e:
             raise
     except Exception as e:

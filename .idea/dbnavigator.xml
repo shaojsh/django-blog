@@ -31,7 +31,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="5da1f883-24bd-4021-be41-dc93a9e362c4">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">$sqlite3 DatabaseName.db
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[$sqlite3 DatabaseName.db
 CREATE TABLE user
 (
 Id_P int,
@@ -49,16 +49,14 @@ values (
     :2319898127,
     :sjs,
     :199148)
-;</console>
+;]]></console>
     </connection>
     <connection id="1a88fbba-8984-4fef-a5f9-743917a9245d">
       <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="5da1f883-24bd-4021-be41-dc93a9e362c4" object-ref="schemas/main/tables/user" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="5da1f883-24bd-4021-be41-dc93a9e362c4" />
