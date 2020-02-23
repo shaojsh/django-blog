@@ -1,17 +1,36 @@
-from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse,HttpRequest,HttpResponseBadRequest
-import json
+from django.http import JsonResponse, HttpResponse, HttpRequest, HttpResponseBadRequest
 import logging
 import simplejson
+from .models import User
+from django.db.models.query import QuerySet
+
+
 # Create your views here.
 
-def reg(request:HttpRequest):
+def reg(request: HttpRequest):
     try:
         # payload = json.loads(request.body.decode())
         payload = simplejson.loads(request.body)
-        # email = payload['email']
-        return HttpResponse('welcome to shanghai')
+        email = payload['email']
+        # 数据库中查看Email有没有
+        qs = User.objects.filter(email=email)
+        print(qs.query,'---------------')
+        if qs:  # email已经存在了
+            return HttpResponseBadRequest()
+        name = payload['name']
+        password = payload['password']
+        print(email, name, password)
+
+        user = User()
+        user.email = email
+        user.password = password
+        user.name = name
+
+        try:
+            user.save()
+            return JsonResponse({'user_id':user.id})
+        except Exception as e:
+            raise
     except Exception as e:
         logging.info(e)
     return HttpResponseBadRequest()
-
