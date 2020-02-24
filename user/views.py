@@ -1,6 +1,9 @@
-from django.http import JsonResponse, HttpResponse, HttpRequest, HttpResponseBadRequest
 import logging
+
 import simplejson
+from django.http import JsonResponse, HttpRequest, HttpResponseBadRequest
+from django.shortcuts import render
+
 from .models import User
 
 
@@ -33,3 +36,7 @@ def reg(request: HttpRequest):
     except Exception as e:
         logging.info(e)
     return HttpResponseBadRequest()
+
+
+def index(request: HttpRequest):
+    return render(request, 'index.html')
